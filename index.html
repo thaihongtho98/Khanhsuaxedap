@@ -3,254 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiệm Sửa Xe Ông Khanh - Chuyên Sửa Chữa Mọi Loại Xe Đạp</title>
-    <!-- Font Awesome cho icon -->
+    <title>Phúc Xuyên Quán - Cafe, Gội Đầu & Thư Giãn </title>
+    <!-- Tailwind CSS CDN cho giao diện nhanh & hiện đại -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary-color: #e67e22;
-            --secondary-color: #2c3e50;
-            --light-bg: #f9f9f9;
-            --text-color: #333;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
-            color: var(--text-color);
-            line-height: 1.6;
-            background-color: var(--light-bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
         }
-
-        /* Header */
-        header {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-            text-transform: uppercase;
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.3);
         }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Section */
-        section {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .service-card {
-            background: var(--light-bg);
-            padding: 1.5rem;
-            border-radius: 6px;
-            border-left: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-card h3 {
-            margin-bottom: 0.5rem;
-            color: var(--secondary-color);
-        }
-
-        /* Contact & Info */
-        .info-list {
-            list-style: none;
-        }
-
-        .info-list li {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-list li i {
-            color: var(--primary-color);
-            margin-right: 15px;
-            font-size: 1.3rem;
-            width: 25px;
-            text-align: center;
-        }
-
-        /* Action Buttons */
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px 24px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            color: white;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-facebook {
-            background-color: #1877f2;
-        }
-
-        .btn-map {
-            background-color: #27ae60;
-        }
-
-        .btn-call {
-            background-color: #e74c3c;
-        }
-
-        /* Map Container */
-        .map-container {
-            margin-top: 1rem;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 2px solid #ddd;
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 350px;
-            border: 0;
-            display: block;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary-color);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-            .btn-group {
-                flex-direction: column;
-            }
-            .btn {
-                width: 100%;
-            }
+        .neon-border {
+            border: 1px solid rgba(236, 72, 153, 0.5);
         }
     </style>
 </head>
-<body>
+<body class="bg-[#0b0f19] min-h-screen pb-20">
 
-    <!-- Header -->
-    <header>
-        <h1>Tiệm Sửa Xe Ông Khanh</h1>
-        <p>Chuyên sửa chữa, bảo dưỡng tất cả các loại xe đạp uy tín và nhanh chóng</p>
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-50 glass-card border-b border-gray-800 px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center neon-glow">
+                <i class="fa-solid fa-mug-hot text-white text-lg"></i>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-lg tracking-wide bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">XUYÊN QUÁN</h1>
+                <p class="text-[10px] text-pink-400 font-medium tracking-widest uppercase">Giao diện 5.0 Ultra</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
+            </span>
+            <span class="text-xs font-semibold text-gray-300">Online 24/7</span>
+        </div>
     </header>
 
-    <div class="container">
-
-        <!-- Giới thiệu dịch vụ -->
-        <section>
-            <h2>Dịch Vụ Của Chúng Tôi</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3><i class="fa-solid fa-bicycle"></i> Xe Đạp Thể Thao</h3>
-                    <p>Căn chỉnh đề, bảo dưỡng líp sên, sửa chữa hệ thống phanh đĩa chuyên nghiệp.</p>
-                </div>
-                <div class="service-card">
-                    <h3><i class="fa-solid fa-child-reaching"></i> Xe Đạp Trẻ Em</h3>
-                    <p>Thay săm lốp, sửa chữa bánh phụ, vá săm nhanh chóng tại chỗ.</p>
-                </div>
-                <div class="service-card">
-                    <h3><i class="fa-solid fa-toolbox">Xe Đạp Phổ Thông</i></h3>
-                    <p>Thay thế phụ tùng, tra dầu mỡ, vá xe, nắn vành (niềng) chính xác.</p>
+    <!-- HERO SECTION -->
+    <section class="px-4 pt-6 pb-4">
+        <div class="relative rounded-3xl overflow-hidden glass-card p-6 neon-border">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl"></div>
+            <div class="relative z-10">
+                <span class="bg-pink-500/20 text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Hệ Thống Thư Giãn Đa Không Gian</span>
+                <h2 class="text-2xl font-black mt-3 leading-tight">Cafe Sáng Tạo, <br><span class="text-pink-400">Gội Đầu Thượng Lưu</span> & Massage.</h2>
+                <p class="text-gray-400 text-xs mt-2 leading-relaxed">Trải nghiệm dịch vụ đỉnh cao với đội ngũ chuyên nghiệp, phục vụ tận tâm, mang lại năng lượng tuyệt vời nhất.</p>
+                <div class="mt-4 flex gap-2">
+                    <a href="#services" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-pink-500/30 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Khám Phá Ngay
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Thông tin liên hệ và Bản đồ -->
-        <section>
-            <h2>Thông Tin & Địa Điểm</h2>
-            <ul class="info-list">
-                <li><i class="fa-solid fa-store"></i> <strong>Tên tiệm:</strong> Tiệm Sửa Xe Ông Khanh</li>
-                <li><i class="fa-solid fa-wrench"></i> <strong>Chuyên môn:</strong> Nhận sửa mọi loại xe đạp từ bình dân đến cao cấp.</li>
-                <li><i class="fa-solid fa-clock"></i> <strong>Giờ mở cửa:</strong> 07:00 AM - 19:00 PM (Tất cả các ngày trong tuần)</li>
-            </ul>
+    <!-- MAIN SERVICES (TAB SELECTION) -->
+    <main id="services" class="px-4 space-y-6 mt-4">
 
-            <div class="btn-group">
-                <a href="https://www.facebook.com/babiy.hong" target="_blank" class="btn btn-facebook">
-                    <i class="fa-brands fa-facebook"></i> Liên Hệ Facebook
-                </a>
-                <a href="https://maps.app.goo.gl/uKXBxxXwTG6QgzH18" target="_blank" class="btn btn-map">
-                    <i class="fa-solid fa-map-location-dot"></i> Xem Trên Google Maps
-                </a>
+        <!-- SECTION 1: CAFE & GỘI ĐẦU -->
+        <div>
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-base flex items-center gap-2">
+                    <i class="fa-solid fa-coffee text-amber-400"></i> Cafe & Gội Đầu Thư Giãn
+                </h3>
+                <span class="text-xs text-gray-400">Phổ biến</span>
             </div>
-
-            <div class="map-container">
-                <!-- Google Map nhúng trực tiếp -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.51187427806!2d106.698471!3d10.771612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzExLjgiTiAxMDbCsDQxJzUzLjUiRQ!5e0!3m2!1svi!2svn!4v1620000000000!5m2!1svi!2svn" allowfullscreen="" loading="lazy"></iframe>
+            <div class="grid grid-cols-2 gap-3">
+                <!-- Item 1 -->
+                <div class="glass-card p-3 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="h-28 bg-gray-800 rounded-xl overflow-hidden mb-2 relative">
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80" alt="Cafe" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="font-bold text-sm">Cafe Sữa Đá 5.0</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Đậm đà hương vị nguyên bản.</p>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-pink-400 font-bold text-xs">35.000đ</span>
+                        <button onclick="orderItem('Cafe Sữa Đá 5.0', '35.000đ')" class="bg-gray-800 hover:bg-pink-600 text-white text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="glass-card p-3 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="h-28 bg-gray-800 rounded-xl overflow-hidden mb-2 relative">
+                            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=80" alt="Gội đầu" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="font-bold text-sm">Gội Đầu Thảo Dược</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Massage bấm huyệt cổ vai gáy.</p>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-pink-400 font-bold text-xs">120.000đ</span>
+                        <button onclick="orderItem('Gội Đầu Thảo Dược', '120.000đ')" class="bg-gray-800 hover:bg-pink-600 text-white text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
+        <!-- SECTION 2: MASSAGE & TRAI ĐI KHÁCH (VIP SERVICE) -->
+        <div>
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-base flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-pink-500"></i> Dịch Vụ VIP & Trai Đi Khách
+                </h3>
+                <span class="text-xs text-pink-400 font-semibold">Hot 18+</span>
+            </div>
+            
+            <div class="space-y-3">
+                <!-- Profile Card 1 -->
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-4 border border-pink-500/20">
+                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-800 flex-shrink-0 relative">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Model" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-sm">Alex - Nam Thần (22 tuổi)</h4>
+                            <span class="bg-pink-500/10 text-pink-400 text-[10px] px-2 py-0.5 rounded font-bold">VIP 01</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-1">Chuyên: Massage Body, Đồng hành đi tiệc, Cafe, Đi khách theo giờ.</p>
+                        <div class="mt-2 flex justify-between items-center">
+                            <span class="text-xs text-amber-400 font-semibold"><i class="fa-solid fa-star"></i> 4.9 (120 lượt)</span>
+                            <button onclick="bookingStaff('Alex - Nam Thần')" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs px-3 py-1 rounded-lg font-bold shadow-md shadow-pink-500/20">Đặt Lịch</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-4 border border-pink-500/20">
+                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-800 flex-shrink-0 relative">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Model" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900"></div>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-sm">Kين - Phong Độ (25 tuổi)</h4>
+                            <span class="bg-pink-500/10 text-pink-400 text-[10px] px-2 py-0.5 rounded font-bold">VIP 02</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 mt-1">Chuyên: Trò chuyện tâm sự, Massage thư giãn chuyên sâu, Đi khách cao cấp.</p>
+                        <div class="mt-2 flex justify-between items-center">
+                            <span class="text-xs text-amber-400 font-semibold"><i class="fa-solid fa-star"></i> 5.0 (98 lượt)</span>
+                            <button onclick="bookingStaff('Ken - Phong Độ')" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs px-3 py-1 rounded-lg font-bold shadow-md shadow-pink-500/20">Đặt Lịch</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FLOATING ACTION BUTTON / CART MODAL TRIGGER -->
+    <div class="fixed bottom-4 left-4 right-4 z-40">
+        <div class="glass-card p-3 rounded-2xl flex justify-between items-center shadow-2xl border border-pink-500/30">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-400">Đã chọn dịch vụ:</p>
+                    <p id="selected-count" class="text-xs font-bold text-white">0 dịch vụ</p>
+                </div>
+            </div>
+            <button onclick="openCheckout()" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg shadow-pink-500/30">
+                Thanh Toán Ngay
+            </button>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Tiệm Sửa Xe Ông Khanh. Rất hân hạnh được phục vụ quý khách!</p>
-    </footer>
+    <!-- SIMPLE JAVASCRIPT LOGIC -->
+    <script>
+        let cart = [];
+
+        function orderItem(name, price) {
+            cart.push({name, price});
+            document.getElementById('selected-count').innerText = cart.length + ' dịch vụ';
+            alert('Đã thêm "' + name + '" vào danh sách!');
+        }
+
+        function bookingStaff(staffName) {
+            alert('Hệ thống tiếp nhận yêu cầu đặt lịch với: ' + staffName + '. Nhân viên tổng đài sẽ liên hệ xác nhận bảo mật!');
+        }
+
+        function openCheckout() {
+            if(cart.length === 0) {
+                alert('Vui lòng chọn dịch vụ hoặc nhân viên trước khi thanh toán!');
+                return;
+            }
+            let summary = cart.map(i => i.name + ' (' + i.price + ')').join('\n');
+            alert('Xác nhận đơn hàng của bạn:\n\n' + summary + '\n\nCảm ơn bạn đã sử dụng dịch vụ tại Xuyên Quán 5.0!');
+            cart = [];
+            document.getElementById('selected-count').innerText = '0 dịch vụ';
+        }
+    </script>
 
 </body>
 </html>
