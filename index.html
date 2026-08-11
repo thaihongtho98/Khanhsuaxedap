@@ -3,211 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phúc Xuyên Quán - Cafe, Gội Đầu & Thư Giãn </title>
-    <!-- Tailwind CSS CDN cho giao diện nhanh & hiện đại -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>Phúc Xuyên - Hấp Tinh Đại Pháp 0327770315</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            user-select: none;
+        }
+
+        :root {
+            --primary-color: #00f2fe;
+            --secondary-color: #4facfe;
+            --gold-color: #fbbf24;
+            --aura-shadow: rgba(0, 242, 254, 0.5);
+        }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
-            color: #f3f4f6;
+            background-color: #050711;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow: hidden;
+            position: relative;
         }
-        .glass-card {
-            background: rgba(17, 24, 39, 0.7);
+
+        #particleCanvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            background: rgba(13, 19, 33, 0.94);
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 25px var(--aura-shadow);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 16px;
+            width: 100%;
+            max-width: 410px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--aura-shadow);
+        }
+
+        .header .version-tag {
+            font-size: 0.72rem;
+            color: var(--gold-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* VIP Code Input Box */
+        .vip-box {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .vip-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 6px;
+            padding: 6px 10px;
+            color: #00f2fe;
+            font-size: 0.75rem;
+            outline: none;
+            text-align: center;
+        }
+
+        .vip-btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.7rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Aura Core */
+        .core-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 10px;
+        }
+
+        .aura-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--secondary-color) 0%, var(--primary-color) 40%, transparent 70%);
+            box-shadow: 0 0 25px var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite ease-in-out;
+            cursor: pointer;
+            transition: transform 0.08s;
+        }
+
+        .aura-circle.vip-mode {
+            background: radial-gradient(circle, #f59e0b 0%, #ef4444 50%, transparent 70%);
+            box-shadow: 0 0 40px #f59e0b;
+        }
+
+        .aura-circle:active { transform: scale(0.92); }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        .energy-val { font-size: 1.25rem; font-weight: 800; color: #080911; }
+        .energy-label { font-size: 0.55rem; color: #080911; font-weight: 700; text-transform: uppercase; }
+
+        /* Floating Text */
+        .floating-text {
+            position: absolute;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.95rem;
+            pointer-events: none;
+            animation: floatUp 0.7s ease-out forwards;
+            text-shadow: 0 0 5px #000;
+            z-index: 10;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-30px); }
+        }
+
+        /* Stats Panel */
+        .stats-panel {
+            background: rgba(8, 12, 22, 0.85);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--primary-color);
+            text-align: left;
+            font-size: 0.72rem;
+        }
+
+        .stat-item { display: flex; justify-content: space-between; margin-bottom: 4px; }
+        .stat-item:last-child { margin-bottom: 0; }
+        .stat-label { color: #94a3b8; }
+        .stat-value { color: var(--primary-color); font-weight: 600; }
+
+        /* Shop List */
+        .shop-title {
+            font-size: 0.7rem;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        .shop-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            max-height: 110px;
+            overflow-y: auto;
+            margin-bottom: 8px;
+        }
+
+        .shop-item {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            padding: 5px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .neon-glow {
-            box-shadow: 0 0 25px rgba(236, 72, 153, 0.3);
+
+        .shop-info { text-align: left; }
+        .shop-name { font-size: 0.72rem; font-weight: 600; color: #f8fafc; }
+        .shop-desc { font-size: 0.58rem; color: #64748b; }
+
+        .btn-buy {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.62rem;
+            font-weight: bold;
+            cursor: pointer;
         }
-        .neon-border {
-            border: 1px solid rgba(236, 72, 153, 0.5);
-        }
+
+        .btn-buy:disabled { border-color: #475569; color: #475569; background: transparent; }
+
+        .log-box { font-size: 0.65rem; color: #94a3b8; height: 18px; display: flex; align-items: center; justify-content: center; }
+        .btn-reset { background: none; border: none; color: #475569; font-size: 0.6rem; text-decoration: underline; cursor: pointer; }
     </style>
 </head>
-<body class="bg-[#0b0f19] min-h-screen pb-20">
+<body>
 
-    <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-50 glass-card border-b border-gray-800 px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center neon-glow">
-                <i class="fa-solid fa-mug-hot text-white text-lg"></i>
-            </div>
-            <div>
-                <h1 class="font-extrabold text-lg tracking-wide bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">XUYÊN QUÁN</h1>
-                <p class="text-[10px] text-pink-400 font-medium tracking-widest uppercase">Giao diện 5.0 Ultra</p>
-            </div>
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="container">
+        <div class="header">
+            <h1>Phúc Xuyên</h1>
+            <div class="version-tag">Mật Tịch Code • v0327770315</div>
         </div>
-        <div class="flex items-center space-x-3">
-            <span class="relative flex h-3 w-3">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
-            </span>
-            <span class="text-xs font-semibold text-gray-300">Online 24/7</span>
+
+        <!-- Nhập Mã VIP Code -->
+        <div class="vip-box">
+            <input type="text" id="vipCodeInput" class="vip-input" placeholder="Nhập Mật Tịch Code..." />
+            <button class="vip-btn" onclick="activateVipCode()">KÍCH HOẠT</button>
         </div>
-    </header>
 
-    <!-- HERO SECTION -->
-    <section class="px-4 pt-6 pb-4">
-        <div class="relative rounded-3xl overflow-hidden glass-card p-6 neon-border">
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl"></div>
-            <div class="relative z-10">
-                <span class="bg-pink-500/20 text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Hệ Thống Thư Giãn Đa Không Gian</span>
-                <h2 class="text-2xl font-black mt-3 leading-tight">Cafe Sáng Tạo, <br><span class="text-pink-400">Gội Đầu Thượng Lưu</span> & Massage.</h2>
-                <p class="text-gray-400 text-xs mt-2 leading-relaxed">Trải nghiệm dịch vụ đỉnh cao với đội ngũ chuyên nghiệp, phục vụ tận tâm, mang lại năng lượng tuyệt vời nhất.</p>
-                <div class="mt-4 flex gap-2">
-                    <a href="#services" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-pink-500/30 flex items-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> Khám Phá Ngay
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MAIN SERVICES (TAB SELECTION) -->
-    <main id="services" class="px-4 space-y-6 mt-4">
-
-        <!-- SECTION 1: CAFE & GỘI ĐẦU -->
-        <div>
-            <div class="flex justify-between items-center mb-3">
-                <h3 class="font-bold text-base flex items-center gap-2">
-                    <i class="fa-solid fa-coffee text-amber-400"></i> Cafe & Gội Đầu Thư Giãn
-                </h3>
-                <span class="text-xs text-gray-400">Phổ biến</span>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-                <!-- Item 1 -->
-                <div class="glass-card p-3 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="h-28 bg-gray-800 rounded-xl overflow-hidden mb-2 relative">
-                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80" alt="Cafe" class="w-full h-full object-cover">
-                        </div>
-                        <h4 class="font-bold text-sm">Cafe Sữa Đá 5.0</h4>
-                        <p class="text-[11px] text-gray-400 mt-0.5">Đậm đà hương vị nguyên bản.</p>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-pink-400 font-bold text-xs">35.000đ</span>
-                        <button onclick="orderItem('Cafe Sữa Đá 5.0', '35.000đ')" class="bg-gray-800 hover:bg-pink-600 text-white text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                </div>
-                <!-- Item 2 -->
-                <div class="glass-card p-3 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="h-28 bg-gray-800 rounded-xl overflow-hidden mb-2 relative">
-                            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=80" alt="Gội đầu" class="w-full h-full object-cover">
-                        </div>
-                        <h4 class="font-bold text-sm">Gội Đầu Thảo Dược</h4>
-                        <p class="text-[11px] text-gray-400 mt-0.5">Massage bấm huyệt cổ vai gáy.</p>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-pink-400 font-bold text-xs">120.000đ</span>
-                        <button onclick="orderItem('Gội Đầu Thảo Dược', '120.000đ')" class="bg-gray-800 hover:bg-pink-600 text-white text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                </div>
+        <div class="core-wrapper">
+            <div class="aura-circle" id="auraCore" onclick="absorbEnergy(event)">
+                <div class="energy-val" id="energyDisplay">0</div>
+                <div class="energy-label">Nội Lực</div>
             </div>
         </div>
 
-        <!-- SECTION 2: MASSAGE & TRAI ĐI KHÁCH (VIP SERVICE) -->
-        <div>
-            <div class="flex justify-between items-center mb-3">
-                <h3 class="font-bold text-base flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-pink-500"></i> Dịch Vụ VIP & Trai Đi Khách
-                </h3>
-                <span class="text-xs text-pink-400 font-semibold">Hot 18+</span>
+        <div class="stats-panel">
+            <div class="stat-item">
+                <span class="stat-label">Bú Liếm Bà Già Vợ:</span>
+                <span class="stat-value" id="realmDisplay">Bú Lồn Thần Chưởng</span>
             </div>
-            
-            <div class="space-y-3">
-                <!-- Profile Card 1 -->
-                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-4 border border-pink-500/20">
-                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-800 flex-shrink-0 relative">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Model" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900"></div>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-bold text-sm">Alex - Nam Thần (22 tuổi)</h4>
-                            <span class="bg-pink-500/10 text-pink-400 text-[10px] px-2 py-0.5 rounded font-bold">VIP 01</span>
-                        </div>
-                        <p class="text-[11px] text-gray-400 mt-1">Chuyên: Massage Body, Đồng hành đi tiệc, Cafe, Đi khách theo giờ.</p>
-                        <div class="mt-2 flex justify-between items-center">
-                            <span class="text-xs text-amber-400 font-semibold"><i class="fa-solid fa-star"></i> 4.9 (120 lượt)</span>
-                            <button onclick="bookingStaff('Alex - Nam Thần')" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs px-3 py-1 rounded-lg font-bold shadow-md shadow-pink-500/20">Đặt Lịch</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Profile Card 2 -->
-                <div class="glass-card p-3.5 rounded-2xl flex items-center gap-4 border border-pink-500/20">
-                    <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-800 flex-shrink-0 relative">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Model" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900"></div>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-bold text-sm">Kين - Phong Độ (25 tuổi)</h4>
-                            <span class="bg-pink-500/10 text-pink-400 text-[10px] px-2 py-0.5 rounded font-bold">VIP 02</span>
-                        </div>
-                        <p class="text-[11px] text-gray-400 mt-1">Chuyên: Trò chuyện tâm sự, Massage thư giãn chuyên sâu, Đi khách cao cấp.</p>
-                        <div class="mt-2 flex justify-between items-center">
-                            <span class="text-xs text-amber-400 font-semibold"><i class="fa-solid fa-star"></i> 5.0 (98 lượt)</span>
-                            <button onclick="bookingStaff('Ken - Phong Độ')" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs px-3 py-1 rounded-lg font-bold shadow-md shadow-pink-500/20">Đặt Lịch</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="stat-item">
+                <span class="stat-label">Nước Dâm Thủy / Click:</span>
+                <span class="stat-value" id="rateDisplay">+10</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">PX Ăn Cứt Hải Long :</span>
+                <span class="stat-value" id="gemDisplay">0 💎</span>
             </div>
         </div>
 
-    </main>
-
-    <!-- FLOATING ACTION BUTTON / CART MODAL TRIGGER -->
-    <div class="fixed bottom-4 left-4 right-4 z-40">
-        <div class="glass-card p-3 rounded-2xl flex justify-between items-center shadow-2xl border border-pink-500/30">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400">
-                    <i class="fa-solid fa-cart-shopping"></i>
+        <div class="shop-title">Tâm Pháp Bí Truyền</div>
+        <div class="shop-list">
+            <div class="shop-item">
+                <div class="shop-info">
+                    <div class="shop-name">Địt Vô Miệng</div>
+                    <div class="shop-desc">+15 Nội lực / Click</div>
                 </div>
-                <div>
-                    <p class="text-xs text-gray-400">Đã chọn dịch vụ:</p>
-                    <p id="selected-count" class="text-xs font-bold text-white">0 dịch vụ</p>
-                </div>
+                <button class="btn-buy" id="buyClickBtn" onclick="buyClick()">100 NL</button>
             </div>
-            <button onclick="openCheckout()" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg shadow-pink-500/30">
-                Thanh Toán Ngay
-            </button>
+            <div class="shop-item">
+                <div class="shop-info">
+                    <div class="shop-name">Phúc Xuyên Bú Cu Hải Long (Bi)</div>
+                    <div class="shop-desc">Đổi 500 Nội Lực ➔ 1 Linh Thạch</div>
+                </div>
+                <button class="btn-buy" id="buyGemBtn" onclick="convertGem()">500 NL</button>
+            </div>
         </div>
+
+        <div class="log-box" id="logText">Nhập code VIP 0327770315 Zalo để kích hoạt thần công!</div>
+        <button class="btn-reset" onclick="resetGame()">Làm mới tiến trình</button>
     </div>
 
-    <!-- SIMPLE JAVASCRIPT LOGIC -->
     <script>
-        let cart = [];
+        let state = {
+            energy: 0,
+            gems: 0,
+            clickPower: 10,
+            multiplier: 1,
+            clickCost: 100,
+            isVipActivated: false
+        };
 
-        function orderItem(name, price) {
-            cart.push({name, price});
-            document.getElementById('selected-count').innerText = cart.length + ' dịch vụ';
-            alert('Đã thêm "' + name + '" vào danh sách!');
+        let audioCtx = null;
+
+        function init() {
+            const saved = localStorage.getItem('px_save_0327770315');
+            if (saved) state = JSON.parse(saved);
+            initCanvas();
+            updateUI();
         }
 
-        function bookingStaff(staffName) {
-            alert('Hệ thống tiếp nhận yêu cầu đặt lịch với: ' + staffName + '. Nhân viên tổng đài sẽ liên hệ xác nhận bảo mật!');
-        }
-
-        function openCheckout() {
-            if(cart.length === 0) {
-                alert('Vui lòng chọn dịch vụ hoặc nhân viên trước khi thanh toán!');
-                return;
+        // Kích hoạt VIP Mật Mã Code 0327770315
+        function activateVipCode() {
+            const code = document.getElementById('vipCodeInput').value.trim();
+            if (code === "0327770315") {
+                if (!state.isVipActivated) {
+                    state.isVipActivated = true;
+                    state.multiplier *= 10;
+                    state.gems += 7;
+                    document.getElementById('auraCore').classList.add('vip-mode');
+                    showLog("✨ KÍCH HOẠT THÀNH CÔNG! x10 Công Lực & Tặng 7 Linh Thạch!");
+                } else {
+                    showLog("Nhập SDT Zalo 0327770315 đã được kích hoạt trước đó!");
+                }
+            } else {
+                showLog("Mật mã không chính xác!");
             }
-            let summary = cart.map(i => i.name + ' (' + i.price + ')').join('\n');
-            alert('Xác nhận đơn hàng của bạn:\n\n' + summary + '\n\nCảm ơn bạn đã sử dụng dịch vụ tại Xuyên Quán 5.0!');
-            cart = [];
-            document.getElementById('selected-count').innerText = '0 dịch vụ';
+            updateUI();
+            saveGame();
         }
-    </script>
 
+        function playSound() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(260, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(130, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        }
+
+        function absorbEnergy(e) {
+            let gain = state.clickPower * state.multiplier;
+            state.energy += gain;
+
+            playSound();
+            if (navigator.vibrate) navigator.vibrate(15);
+
+            createPopText(e, `+${gain}`);
+            spawnParticles(e.clientX, e.clientY);
+
+            updateUI();
+            saveGame();
+        }
+
+        function buyClick() {
+            if (state.energy >= state.clickCost) {
+                state.energy -= state.clickCost;
+                state.clickPower += 15;
+                state.clickCost = Math.floor(state.clickCost * 1.6);
+                showLog("Luyện thành công Địt Vô Miệng!");
+                updateUI();
+                saveGame();
+            }
+        }
+
+        function convertGem() {
+            if (state.energy >= 500) {
+                state.energy -= 500;
+                state.gems += 1;
+                showLog("💎 Ngưng luyện thành công 1 Cứt Không Đủ!");
+                updateUI();
+                saveGame();
+            } else {
+                showLog("Không đủ 500 Nước Dâm Thủy để ngưng luyện!");
+            }
+        }
+
+        function createPopText(e, text) {
+            if (!e || !e.clientX) return;
+            const pop = document.createElement('div');
+            pop.className = 'floating-text';
+            pop.innerText = text;
+            pop.style.left = `${e.clientX - 15}px`;
+            pop.style.top = `${e.clientY - 20}px`;
+            document.body.appendChild(pop);
+            setTimeout(() => pop.remove(), 700);
+        }
+
+        function updateUI() {
+            document.getElementById('energyDisplay').innerText = Math.floor(state.energy);
+            document.getElementById('gemDisplay').innerText = `${state.gems} 💎`;
+            document.getElementById('rateDisplay').innerText = `+${state.clickPower * state.multiplier}`;
+
+            document.getElementById('buyClickBtn').innerText = `${state.clickCost} NL`;
+            document.getElementById('buyClickBtn').disabled = state.energy < state.clickCost;
+
+            if (state.isVipActivated) {
+                document.getElementById('auraCore').classList.add('vip-mode');
+            }
+        }
+
+        function showLog(msg) { document.getElementById('logText').innerText = msg; }
+        function saveGame() {
+            localStorage.setItem('px_save_0327770315', JSON.stringify(state));
+        }
+
+        function resetGame() {
+            if (confirm("Reset lại toàn bộ dữ liệu?")) {
+                localStorage.removeItem('px_save_0327770315');
+                location.reload();
+            }
+        }
+
+        /* Canvas Particle Engine */
+        let canvas, ctx, particles = [];
+        function initCanvas() {
+            canvas = document.getElementById('particleCanvas');
+            ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            animateParticles();
+        }
+
+        function spawnParticles(x, y) {
+            if (!x) return;
+            for (let i = 0; i < 5; i++) {
+                particles.push({
+                    x: x, y: y,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: (Math.random() - 0.5) * 4,
+                    size: Math.random() * 3 + 1,
+                    alpha: 1
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.04;
+                ctx.fillStyle = state.isVipActivated ? `#f59e0b` : `#00f2fe`;
+                ctx.globalAlpha = p.alpha;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (p.alpha <= 0) particles.splice(index, 1);
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        init();
+    </script>
 </body>
 </html>
