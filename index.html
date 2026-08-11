@@ -254,7 +254,7 @@
             </div>
             <div class="stat-item">
                 <span class="stat-label">PX Ăn Cứt Hải Long :</span>
-                <span class="stat-value" id="gemDisplay">0 💎</span>
+                <span class="stat-value" id="gemDisplay">0 💩</span>
             </div>
         </div>
 
@@ -363,7 +363,7 @@
             if (state.energy >= 500) {
                 state.energy -= 500;
                 state.gems += 1;
-                showLog("💎 Ngưng luyện thành công 1 Cứt Không Đủ!");
+                showLog("💩 Ngưng luyện thành công 1 Cứt Không Đủ!");
                 updateUI();
                 saveGame();
             } else {
@@ -384,7 +384,7 @@
 
         function updateUI() {
             document.getElementById('energyDisplay').innerText = Math.floor(state.energy);
-            document.getElementById('gemDisplay').innerText = `${state.gems} 💎`;
+            document.getElementById('gemDisplay').innerText = `${state.gems} 💩`;
             document.getElementById('rateDisplay').innerText = `+${state.clickPower * state.multiplier}`;
 
             document.getElementById('buyClickBtn').innerText = `${state.clickCost} NL`;
